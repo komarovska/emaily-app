@@ -5,7 +5,7 @@ import Form from './Form';
 
 const Dashboard = () => <h2>Dashboard</h2>;
 const SurveyNew = () => <h2>SurveyNew</h2>;
-const Landing = () => <h2>Landing</h2>;
+const Landing = () => <h2>Nice Landing</h2>;
 
 const App = () => {
     return(

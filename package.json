@@ -35,5 +35,6 @@
     "passport-google-oauth20": "^2.0.0",
     "react-app-rewired": "^2.1.5"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "heroku-run-build-script": true
 }

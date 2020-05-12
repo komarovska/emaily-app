@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {createGetRequest, createPostRequest} from "./request";
 
 function resolveUrl(url) {
@@ -5,20 +6,10 @@ function resolveUrl(url) {
 }
 
 export default class mongoApi {
-    static sendMovie = data => {
-        console.log('mongoApi', data);
-        createPostRequest(
-            resolveUrl('api/sendMovie'),
-            {
-                body: data,
-            },
-        ).fetch();
-    };
 
-    static getMovies = () => {
-        createGetRequest(
-            resolveUrl('api/moviesList'),
-            {}
-        ).fetch();
-    }
+    static sendMovie = data => {
+        axios.post(resolveUrl('api/sendMovie'), { data });
+}
+
+    static getMovies = () => fetch(resolveUrl('api/moviesList'));
 }

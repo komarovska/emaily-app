@@ -17,10 +17,14 @@ export default class ApplicationStore {
       director: '',
   };
 
+  @observable movies = {};
+
   @action changeFormData = (input, name) => this.formData[name] = input;
 
   @action submitData = () => {
       console.log('onSubmit', this.formData);
       mongoApi.sendMovie({ title: this.formData.title, director: this.formData.director });
   }
+
+  @action setMovies = data => this.movies = data;
 }

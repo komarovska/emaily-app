@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import * as mobx from 'mobx';
+import axios from 'axios';
 import { inject, observer } from "mobx-react";
 import mongoApi from '../api/mongoApi';
 
@@ -7,14 +9,22 @@ import mongoApi from '../api/mongoApi';
 class Dashboard extends Component {
 
     componentDidMount() {
-        mongoApi.getMovies().then(response => {
-            console.log(response);
-            // this.props.subscriptionSchema.saveSchema(response.data);
-        });
+        axios.get("http://localhost:5000/api/moviesList").then(res => {
+            console.log(res);
+            this.props.application.setMovies(res.data);
+            console.log(mobx.toJS(this.props.application.movies));
+        })
     }
 
     render () {
-        return <div>ok</div>
+        const movies = mobx.toJS(this.props.application.movies);
+        return (
+        <div>
+            <ul>
+                {Object.keys(this.props.application.movies).map((movie, index) => <li>{this.props.application.movies[movie].title}</li>)}
+            </ul>
+        </div>
+        )
     }
 }
 

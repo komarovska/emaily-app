@@ -51,5 +51,36 @@ module.exports = app => {
             .catch(err => {
                 res.status(400).send("Unable to save to database");
             });
-    })
+    });
+
+    // app.get('/api/moviesList', function(req, res) {
+        //     Movie.find({}, function(err, movies) {
+        //         let movieMap = {};
+        //
+        //         movies.forEach(function(movie) {
+        //             if (movie.title) {
+        //                 movieMap[movie._id] = movie;
+        //             }
+        //         })
+        //             .then(item => {
+        //             res.send(movieMap);
+        //         })
+        //             .catch(err => {
+        //                 res.status(400).send("Unable to get from database")
+        //             })
+        //     });
+        // });
+
+    app.get('/api/moviesList', async (req, res) => {
+
+        const movies = await Movie.find({});
+
+        const movieMap = {};
+        movies.forEach((movie) => {
+            movieMap[movie._id] = movie;
+        });
+
+        res.send(movieMap);
+
+    });
 };

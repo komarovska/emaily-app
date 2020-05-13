@@ -9,7 +9,7 @@ import mongoApi from '../api/mongoApi';
 class Dashboard extends Component {
 
     componentDidMount() {
-        axios.get("http://localhost:5000/api/moviesList").then(res => {
+        mongoApi.getMovies().then(res => {
             console.log(res);
             this.props.application.setMovies(res.data);
             console.log(mobx.toJS(this.props.application.movies));

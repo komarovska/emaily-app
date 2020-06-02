@@ -42,8 +42,8 @@ module.exports = app => {
     );
 
     app.post('/api/sendMovie', function(req, res) {
-        console.log('node', req.body);
-        let myMovie = new Movie ({ _id: new mongoose.Types.ObjectId(), ...req.body });
+        console.log('MOVIE', req.body.data);
+        let myMovie = new Movie ({ _id: new mongoose.Types.ObjectId(), ...req.body.data });
         myMovie.save()
             .then(item => {
                 res.send("Name saved to database");
@@ -77,7 +77,9 @@ module.exports = app => {
 
         const movieMap = {};
         movies.forEach((movie) => {
-            movieMap[movie._id] = movie;
+            if (movie.title) {
+               movieMap[movie._id] = movie;
+            }
         });
 
         res.send(movieMap);

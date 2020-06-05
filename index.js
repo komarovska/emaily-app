@@ -2,6 +2,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const express = require('express');
+const path = require('path');
 const mongoose = require('mongoose');
 var cors = require('cors');
 const keys = require('./config/keys');
@@ -54,7 +55,6 @@ require('./routes/authRoutes')(app);
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.resolve(__dirname, 'client', 'build')));
 
-    const path = require('path');
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     })

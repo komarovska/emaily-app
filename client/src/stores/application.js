@@ -12,6 +12,8 @@ export default class ApplicationStore {
   //   }
   // }
 
+  @observable isLoggedIn = false;
+
   @observable formData = {
       title: '',
       director: '',
@@ -20,6 +22,8 @@ export default class ApplicationStore {
   @observable movies = {};
 
   @action changeFormData = (input, name) => this.formData[name] = input;
+
+  @action changeLoginState = (param) => this.isLoggedIn = param;
 
   @action submitData = () => {
       console.log('onSubmit', this.formData);

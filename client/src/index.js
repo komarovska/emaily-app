@@ -11,17 +11,17 @@ const routingStore = new RouterStore();
 const history = syncHistoryWithStore(createBrowserHistory(), routingStore);
 
 const stores = {
-    routing: routingStore,
-    application: new ApplicationStore(),
+  routing: routingStore,
+  application: new ApplicationStore(),
 };
 
 ReactDOM.render(
-    <Provider { ...stores }>
-        <BrowserRouter basename="/">
-            <Router history={history}>
-                <App />
-            </Router>
-        </BrowserRouter>
-    </Provider>,
-    document.getElementById('root')
+  <Provider {...stores}>
+    <BrowserRouter basename="/">
+      <Router history={history}>
+        <App />
+      </Router>
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById('root'),
 );

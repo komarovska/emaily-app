@@ -3,20 +3,20 @@ import axios from 'axios';
 let window;
 
 export function resolveApi(apiConfig) {
-    const env = typeof window !== 'undefined' ? window.ENV : process.env.ENV;
-    if (env && apiConfig[env]) {
-        return apiConfig[env];
-    }
+  const env = typeof window !== 'undefined' ? window.ENV : process.env.ENV;
+  if (env && apiConfig[env]) {
+    return apiConfig[env];
+  }
 
-    return apiConfig.production;
+  return apiConfig.production;
 }
 
 export function resolveUrl(config, url) {
-    if (config && config.url && url) {
-        return `${config.url}/${url}`;
-    }
+  if (config && config.url && url) {
+    return `${config.url}/${url}`;
+  }
 
-    return '';
+  return '';
 }
 
 class Request {
@@ -30,13 +30,13 @@ class Request {
 //
 // body?: {};
 
-constructor(method, url, options) {
+  constructor(method, url, options) {
     const {
-        params = {},
-        headers = {
-            'Content-Type': 'application/json',
-        },
-        body = undefined,
+      params = {},
+      headers = {
+        'Content-Type': 'application/json',
+      },
+      body = undefined,
     } = options;
 
     this.method = method;
@@ -44,50 +44,50 @@ constructor(method, url, options) {
     this.params = params;
     this.setHeaders(headers);
     this.body = body;
-}
+  }
 
-setHeaders(headers) {
+  setHeaders(headers) {
     this.headers = {
-        ...this.headers,
-        ...headers,
+      ...this.headers,
+      ...headers,
     };
-}
+  }
 
-fetch() {
+  fetch() {
     if (!this.url) {
-        throw new Error('No URL provided');
+      throw new Error('No URL provided');
     }
 
     return axios({
-        url: this.url,
-        method: this.method,
-        data: this.body,
-        params: this.params,
-        headers: this.headers,
+      url: this.url,
+      method: this.method,
+      data: this.body,
+      params: this.params,
+      headers: this.headers,
 
-    }).catch(e => {
-        console.log(e); // todo log error with winston
-        throw e;
+    }).catch((e) => {
+      console.log(e); // todo log error with winston
+      throw e;
     });
-}
+  }
 }
 
 export function createGetRequest(url, options) {
-    return new Request('GET', url, options);
+  return new Request('GET', url, options);
 }
 
 export function createPostRequest(url, options) {
-    return new Request('POST', url, options);
+  return new Request('POST', url, options);
 }
 
 export function createPatchRequest(url, options) {
-    return new Request('PATCH', url, options);
+  return new Request('PATCH', url, options);
 }
 
 export function createPutRequest(url, options) {
-    return new Request('PUT', url, options);
+  return new Request('PUT', url, options);
 }
 
 export function createDeleteRequest(url, options) {
-    return new Request('DELETE', url, options);
+  return new Request('DELETE', url, options);
 }
